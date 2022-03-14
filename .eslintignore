@@ -1,0 +1,5 @@
+node_modules
+dist
+output
+build
+__tests__
