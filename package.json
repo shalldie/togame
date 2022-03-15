@@ -1,11 +1,21 @@
 {
-  "name": "games",
+  "name": "togame",
   "version": "0.0.1",
   "description": "Games of node in terminals. Node的控制台游戏集合。",
   "main": "dist/main.js",
+  "bin": {
+    "togame": "./dist/main.js"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
+    "lint": "eslint --ext .js,.ts src",
     "build": "tsc",
     "start": "npm run build && node dist/main.js"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
   },
   "repository": {
     "type": "git",

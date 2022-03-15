@@ -16,13 +16,15 @@ export class UserInterface extends EventEmitter implements ISetable, IDisposable
 
     private promptBox!: any;
 
+    private gameoverBox!: any;
+
     public setup(width: number, height: number) {
         this.initEvents();
         this.initLayouts(width, height);
     }
 
     private initEvents() {
-        this.screen.key(['escape', 'q', 'C-c'], () => {
+        this.screen.key(['escape', 'C-c'], () => {
             return process.exit(0);
         });
 
@@ -42,6 +44,28 @@ export class UserInterface extends EventEmitter implements ISetable, IDisposable
             height: height,
             tags: true
         });
+
+        this.gameoverBox = blessed.box({
+            parent: this.screen,
+            top: 'center',
+            left: 'center',
+            width: 20,
+            height: 6,
+            tags: true,
+            valign: 'middle',
+            content: `{center}Game Over!\n\nPress enter to try again{/center}`,
+            border: {
+                type: 'line'
+            },
+            style: {
+                fg: 'black',
+                bg: 'magenta',
+                border: {
+                    fg: '#ffffff'
+                }
+            }
+        });
+        this.hideGameOver();
 
         this.playground = blessed.box({
             parent: this.layout,
@@ -88,7 +112,7 @@ export class UserInterface extends EventEmitter implements ISetable, IDisposable
         if (contents.length) {
             contents.push('--------------------');
         }
-        contents = [...contents, 'Ctrl: ↑ ↓ ← →', 'Exit: ctrl + c'];
+        contents = [...contents, 'Ctrl: `↑ ↓ ← →`', 'Exit: `ctrl + c`'];
         this.promptBox.content = contents.join('\n');
         this.promptBox.height = contents.length + 2;
     }
@@ -109,6 +133,16 @@ export class UserInterface extends EventEmitter implements ISetable, IDisposable
                 }
             });
         });
+    }
+
+    public showGameOver() {
+        this.gameoverBox.show();
+        this.draw();
+    }
+
+    public hideGameOver() {
+        this.gameoverBox.hide();
+        this.draw();
     }
 
     public draw() {

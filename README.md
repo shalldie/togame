@@ -1,3 +1,5 @@
-# node-games
+# togame
 
-Games of node in terminal. Node 的控制台游戏集合。
+It's time to game!
+
+Games in terminal. 控制台游戏集合。
