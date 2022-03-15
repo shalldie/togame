@@ -1,7 +1,7 @@
 {
   "name": "togame",
-  "version": "0.0.1",
-  "description": "Games of node in terminals. Node的控制台游戏集合。",
+  "version": "0.0.2",
+  "description": "Games in terminal. 控制台游戏集合。",
   "main": "dist/main.js",
   "bin": {
     "togame": "./dist/main.js"
@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shalldie/node-games.git"
+    "url": "git+https://github.com/shalldie/togame.git"
   },
   "keywords": [
     "node",
@@ -29,9 +29,9 @@
   "author": "shalldie",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/shalldie/node-games/issues"
+    "url": "https://github.com/shalldie/togame/issues"
   },
-  "homepage": "https://github.com/shalldie/node-games#readme",
+  "homepage": "https://github.com/shalldie/togame#readme",
   "devDependencies": {
     "@types/inquirer": "^8.2.0",
     "@types/node": "^17.0.21",

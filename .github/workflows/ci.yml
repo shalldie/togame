@@ -54,4 +54,4 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: shalldie/togame:${{ steps.publish.outputs.version }}
+          tags: shalldie/togame:latest,shalldie/togame:${{ steps.publish.outputs.version }}
