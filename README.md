@@ -17,7 +17,7 @@ Games in terminal. 控制台游戏集合。
     <img width="600" src="https://user-images.githubusercontent.com/9987486/158326135-40402735-08b4-49ff-a7ba-0e5a2449feb8.png" alt="snake">
 </p>
 
-## Installation
+## Install && Play
 
 ### npm
 

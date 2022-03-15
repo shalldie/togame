@@ -3,8 +3,11 @@
 import inquirer from 'inquirer';
 import { EGame, IGame } from './Games';
 import { Snake } from './Games/Snake';
+import { ScaleUserInterface } from './ui/ScaleUserInterface';
 
 async function main() {
+    await new ScaleUserInterface().setup();
+
     const { gameName } = await inquirer.prompt({
         type: 'list',
         name: 'gameName',

@@ -1,1 +1,2 @@
-export * from './UserInterface';
+export * from './base';
+export * from './GameUserInterface';

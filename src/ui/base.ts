@@ -1,29 +1,26 @@
-import blessed from 'blessed';
+import blessed, { Widgets } from 'blessed';
 import EventEmitter from 'events';
-import { WIDTH_SCALE } from '../config';
-import { IPoint } from '../shape/IPoint';
+import { config } from '../config';
 
-export class UserInterface extends EventEmitter implements ISetable, IDisposable {
-    private screen = blessed.screen({
+export class UserInterfaceBase extends EventEmitter implements ISetable, IDisposable {
+    public screen: Widgets.Screen = blessed.screen({
         smartCSR: true,
         autoPadding: true,
         title: 'Game >_<#@!'
     });
 
-    private layout!: any;
+    public layout!: Widgets.BoxElement;
 
-    private playground!: any;
+    public playground!: Widgets.BoxElement;
 
-    private promptBox!: any;
-
-    private gameoverBox!: any;
+    public promptBox!: Widgets.BoxElement;
 
     public setup(width: number, height: number) {
         this.initEvents();
         this.initLayouts(width, height);
     }
 
-    private initEvents() {
+    protected initEvents() {
         this.screen.key(['escape', 'C-c'], () => {
             return process.exit(0);
         });
@@ -33,45 +30,23 @@ export class UserInterface extends EventEmitter implements ISetable, IDisposable
         });
     }
 
-    private initLayouts(width: number, height: number) {
+    protected initLayouts(width: number, height: number) {
         const widPrompt = 8;
 
         this.layout = blessed.box({
             parent: this.screen,
             top: 'center',
             left: 'center',
-            width: (width + widPrompt) * WIDTH_SCALE,
+            width: (width + widPrompt) * config.WIDTH_SCALE,
             height: height,
             tags: true
         });
-
-        this.gameoverBox = blessed.box({
-            parent: this.screen,
-            top: 'center',
-            left: 'center',
-            width: 20,
-            height: 6,
-            tags: true,
-            valign: 'middle',
-            content: `{center}Game Over!\n\nPress enter to try again{/center}`,
-            border: {
-                type: 'line'
-            },
-            style: {
-                fg: 'black',
-                bg: 'magenta',
-                border: {
-                    fg: '#ffffff'
-                }
-            }
-        });
-        this.hideGameOver();
 
         this.playground = blessed.box({
             parent: this.layout,
             top: 0,
             left: 0,
-            width: width * WIDTH_SCALE,
+            width: width * config.WIDTH_SCALE,
             height: height,
             // tags: true,
             border: {
@@ -89,7 +64,7 @@ export class UserInterface extends EventEmitter implements ISetable, IDisposable
             parent: this.layout,
             top: 0,
             right: 0,
-            width: widPrompt * WIDTH_SCALE,
+            width: widPrompt * config.WIDTH_SCALE,
             height: 7,
             // content: ['Ctrl: ↑ ↓ ← →', 'Exit: ctrl + c'].join('\n'),
             align: 'center',
@@ -115,34 +90,6 @@ export class UserInterface extends EventEmitter implements ISetable, IDisposable
         contents = [...contents, 'Ctrl: `↑ ↓ ← →`', 'Exit: `ctrl + c`'];
         this.promptBox.content = contents.join('\n');
         this.promptBox.height = contents.length + 2;
-    }
-
-    public setRects(points: IPoint[]) {
-        this.playground.children.forEach(child => child.destroy());
-        this.playground.children = [];
-        points.forEach(p => {
-            blessed.box({
-                parent: this.playground,
-                top: p.y,
-                left: p.x * WIDTH_SCALE,
-                width: 1 * WIDTH_SCALE,
-                height: 1,
-                // tags: true,
-                style: {
-                    bg: p.color || '#2ad'
-                }
-            });
-        });
-    }
-
-    public showGameOver() {
-        this.gameoverBox.show();
-        this.draw();
-    }
-
-    public hideGameOver() {
-        this.gameoverBox.hide();
-        this.draw();
     }
 
     public draw() {

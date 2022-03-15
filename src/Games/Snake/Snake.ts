@@ -1,14 +1,14 @@
 import { IGame } from '..';
 import { EDirection } from '../../common/EDirection';
 import { IPoint } from '../../shape';
-import { UserInterface } from '../../ui';
+import { GameUserInterface } from '../../ui';
 
 const WIDTH = 20;
 const HEIGHT = 20;
 const INTERVAL = 200;
 
 export class Snake implements IGame {
-    private ui = new UserInterface();
+    private ui = new GameUserInterface();
     private timer: any;
 
     /** 当前食物 🍜 */

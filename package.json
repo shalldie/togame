@@ -33,6 +33,7 @@
   },
   "homepage": "https://github.com/shalldie/togame#readme",
   "devDependencies": {
+    "@types/blessed": "^0.1.19",
     "@types/inquirer": "^8.2.0",
     "@types/node": "^17.0.21",
     "@typescript-eslint/eslint-plugin": "^5.14.0",
