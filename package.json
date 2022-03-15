@@ -1,6 +1,6 @@
 {
   "name": "togame",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Games in terminal. 控制台游戏集合。",
   "main": "dist/main.js",
   "bin": {
