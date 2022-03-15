@@ -1,35 +1,32 @@
 #!/usr/bin/env node
 
-import inquirer from 'inquirer';
-import { EGame, IGame } from './Games';
+import { IGame } from './Games';
 import { Snake } from './Games/Snake';
+import { Tetris } from './Games/Tetris';
+import { ListUserInterface } from './ui/ListUserInterface';
 import { ScaleUserInterface } from './ui/ScaleUserInterface';
 
 async function main() {
+    // 清屏
+    process.stdout.write('\x1b[2J');
+    process.stdout.write('\x1b[0f');
+
+    // 调整 config
     await new ScaleUserInterface().setup();
 
-    const { gameName } = await inquirer.prompt({
-        type: 'list',
-        name: 'gameName',
-        message: 'Choose the game you want.',
-        choices: [
-            {
-                name: EGame.Snake + ' - 贪吃蛇',
-                value: EGame.Snake
-            },
-            {
-                name: EGame.Tetris + ' - 俄罗斯方块',
-                value: EGame.Tetris
-            }
-        ]
-    });
+    // 选择游戏
+    const opt = await new ListUserInterface().choseOptions([
+        {
+            label: '1. Game - Snake',
+            value: Snake
+        },
+        {
+            label: '2. Game - Tetris',
+            value: Tetris
+        }
+    ]);
 
-    const gameMap: Record<EGame, new () => IGame> = {
-        [EGame.Snake]: Snake,
-        [EGame.Tetris]: Snake
-    };
-
-    const Game = gameMap[gameName as EGame];
+    const Game = opt.value as new () => IGame;
 
     if (Game) {
         new Game().setup();

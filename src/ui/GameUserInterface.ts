@@ -4,10 +4,53 @@ import { IPoint } from '../shape/IPoint';
 import { UserInterfaceBase } from './base';
 
 export class GameUserInterface extends UserInterfaceBase {
+    public playground!: Widgets.BoxElement;
+
+    public promptBox!: Widgets.BoxElement;
+
     public gameoverBox!: Widgets.BoxElement;
 
     protected initLayouts(width: number, height: number): void {
-        super.initLayouts(width, height);
+        const widPrompt = 8;
+
+        super.initLayouts(width + widPrompt, height);
+
+        this.playground = blessed.box({
+            parent: this.layout,
+            top: 0,
+            left: 0,
+            width: width * config.WIDTH_SCALE,
+            height: height,
+            border: {
+                type: 'line'
+            },
+            style: {
+                border: {
+                    fg: '#fff'
+                },
+                bg: '#000'
+            }
+        });
+
+        this.promptBox = blessed.box({
+            parent: this.layout,
+            top: 0,
+            right: 0,
+            width: widPrompt * config.WIDTH_SCALE,
+            height: 7,
+            align: 'center',
+            valign: 'middle',
+            border: {
+                type: 'line'
+            },
+            style: {
+                border: {
+                    fg: '#fff'
+                },
+                bg: '#000'
+            }
+        });
+        this.setPromptContents();
 
         this.gameoverBox = blessed.box({
             parent: this.screen,
@@ -32,6 +75,15 @@ export class GameUserInterface extends UserInterfaceBase {
         this.hideGameOver();
     }
 
+    public setPromptContents(contents: string[] = []) {
+        if (contents.length) {
+            contents.push('--------------------');
+        }
+        contents = [...contents, 'Ctrl: `↑ ↓ ← →`', 'Exit: `ctrl + c`'];
+        this.promptBox.setContent(contents.join('\n'));
+        this.promptBox.height = contents.length + 2;
+    }
+
     public setRects(points: IPoint[]) {
         this.playground.children.forEach(child => child.destroy());
         this.playground.children = [];
@@ -42,7 +94,6 @@ export class GameUserInterface extends UserInterfaceBase {
                 left: p.x * config.WIDTH_SCALE,
                 width: 1 * config.WIDTH_SCALE,
                 height: 1,
-                // tags: true,
                 style: {
                     bg: p.color || '#2ad'
                 }

@@ -44,7 +44,6 @@
     "typescript": "^4.6.2"
   },
   "dependencies": {
-    "blessed": "^0.1.81",
-    "inquirer": "^8.2.1"
+    "blessed": "^0.1.81"
   }
 }

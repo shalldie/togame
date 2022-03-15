@@ -11,7 +11,19 @@ Games in terminal. 控制台游戏集合。
 
 ## Games
 
+Select the game with arrow keys. 用方向键选择游戏。
+
+<p align="center">
+    <img width="360" src="https://user-images.githubusercontent.com/9987486/158424964-a0958a0a-d48b-4ae9-b4b1-136c5f92190b.png" alt="snake">
+</p>
+
 ### Snake - 贪吃蛇
+
+<p align="center">
+    <img width="600" src="https://user-images.githubusercontent.com/9987486/158326135-40402735-08b4-49ff-a7ba-0e5a2449feb8.png" alt="snake">
+</p>
+
+### Tetris - 俄罗斯方块
 
 <p align="center">
     <img width="600" src="https://user-images.githubusercontent.com/9987486/158326135-40402735-08b4-49ff-a7ba-0e5a2449feb8.png" alt="snake">
@@ -39,3 +51,7 @@ npx togame
 ```bash
 docker run -it shalldie/togame
 ```
+
+## License
+
+MIT

@@ -11,10 +11,6 @@ export class UserInterfaceBase extends EventEmitter implements ISetable, IDispos
 
     public layout!: Widgets.BoxElement;
 
-    public playground!: Widgets.BoxElement;
-
-    public promptBox!: Widgets.BoxElement;
-
     public setup(width: number, height: number) {
         this.initEvents();
         this.initLayouts(width, height);
@@ -31,65 +27,14 @@ export class UserInterfaceBase extends EventEmitter implements ISetable, IDispos
     }
 
     protected initLayouts(width: number, height: number) {
-        const widPrompt = 8;
-
         this.layout = blessed.box({
             parent: this.screen,
             top: 'center',
             left: 'center',
-            width: (width + widPrompt) * config.WIDTH_SCALE,
+            width: width * config.WIDTH_SCALE,
             height: height,
             tags: true
         });
-
-        this.playground = blessed.box({
-            parent: this.layout,
-            top: 0,
-            left: 0,
-            width: width * config.WIDTH_SCALE,
-            height: height,
-            // tags: true,
-            border: {
-                type: 'line'
-            },
-            style: {
-                border: {
-                    fg: '#fff'
-                },
-                bg: '#000'
-            }
-        });
-
-        this.promptBox = blessed.box({
-            parent: this.layout,
-            top: 0,
-            right: 0,
-            width: widPrompt * config.WIDTH_SCALE,
-            height: 7,
-            // content: ['Ctrl: ↑ ↓ ← →', 'Exit: ctrl + c'].join('\n'),
-            align: 'center',
-            valign: 'middle',
-            // tags: true,
-            border: {
-                type: 'line'
-            },
-            style: {
-                border: {
-                    fg: '#fff'
-                },
-                bg: '#000'
-            }
-        });
-        this.setPromptContents();
-    }
-
-    public setPromptContents(contents: string[] = []) {
-        if (contents.length) {
-            contents.push('--------------------');
-        }
-        contents = [...contents, 'Ctrl: `↑ ↓ ← →`', 'Exit: `ctrl + c`'];
-        this.promptBox.content = contents.join('\n');
-        this.promptBox.height = contents.length + 2;
     }
 
     public draw() {
