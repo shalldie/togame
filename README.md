@@ -14,19 +14,19 @@ Games in terminal. 控制台游戏集合。
 Select the game with arrow keys. 用方向键选择游戏。
 
 <p align="center">
-    <img width="360" src="https://user-images.githubusercontent.com/9987486/158424964-a0958a0a-d48b-4ae9-b4b1-136c5f92190b.png" alt="snake">
+    <img width="520" src="https://user-images.githubusercontent.com/9987486/158653294-1dab7a06-e341-46b9-8fe1-96f81d9518ec.png" alt="snake">
 </p>
 
 ### Snake - 贪吃蛇
 
 <p align="center">
-    <img width="600" src="https://user-images.githubusercontent.com/9987486/158326135-40402735-08b4-49ff-a7ba-0e5a2449feb8.png" alt="snake">
+    <img width="600" src="https://user-images.githubusercontent.com/9987486/158651144-ae42547d-de38-4c59-bf4e-9829d733ef32.png" alt="snake">
 </p>
 
 ### Tetris - 俄罗斯方块
 
 <p align="center">
-    <img width="600" src="https://user-images.githubusercontent.com/9987486/158592783-0b20da03-39b7-4830-a669-170355f93f2b.png" alt="tetris">
+    <img width="600" src="https://user-images.githubusercontent.com/9987486/158651884-17b3cbb4-467f-47a9-af55-b3df7bb10071.png" alt="tetris">
 </p>
 
 ## Install && Play

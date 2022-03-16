@@ -3,8 +3,8 @@ import { EDirection } from '../../common/EDirection';
 import { IPoint } from '../../shape';
 import { GameUserInterface } from '../../ui';
 
-const WIDTH = 20;
-const HEIGHT = 20;
+const WIDTH = 18;
+const HEIGHT = 18;
 const INTERVAL = 200;
 
 export class Snake implements IGame {

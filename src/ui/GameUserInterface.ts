@@ -6,6 +6,8 @@ import { UserInterfaceBase } from './base';
 export class GameUserInterface extends UserInterfaceBase {
     public playground!: Widgets.BoxElement;
 
+    public tipBox!: Widgets.BoxElement;
+
     public promptBox!: Widgets.BoxElement;
 
     public gameoverBox!: Widgets.BoxElement;
@@ -13,12 +15,12 @@ export class GameUserInterface extends UserInterfaceBase {
     protected initLayouts(width: number, height: number): void {
         const widPrompt = 8;
 
-        super.initLayouts(width + widPrompt, height);
+        super.initLayouts(width + widPrompt + 4, height + 4);
 
         this.playground = blessed.box({
             parent: this.layout,
-            top: 0,
-            left: 0,
+            top: 1,
+            left: 4,
             width: width * config.WIDTH_SCALE,
             height: height,
             border: {
@@ -26,7 +28,29 @@ export class GameUserInterface extends UserInterfaceBase {
             },
             style: {
                 border: {
-                    fg: '#fff'
+                    fg: '#fff',
+                    bg: '#000'
+                },
+                bg: '#000'
+            }
+        });
+
+        this.tipBox = blessed.box({
+            parent: this.layout,
+            top: 1,
+            right: 4,
+            width: widPrompt * config.WIDTH_SCALE,
+            height: 4,
+            align: 'center',
+            valign: 'middle',
+            content: ['Ctrl: `↑ ↓ ← →`', 'Exit: `ctrl + c`'].join('\n'),
+            border: {
+                type: 'line'
+            },
+            style: {
+                border: {
+                    fg: '#fff',
+                    bg: '#000'
                 },
                 bg: '#000'
             }
@@ -34,10 +58,10 @@ export class GameUserInterface extends UserInterfaceBase {
 
         this.promptBox = blessed.box({
             parent: this.layout,
-            top: 0,
-            right: 0,
+            top: 5,
+            right: 4,
             width: widPrompt * config.WIDTH_SCALE,
-            height: 7,
+            height: 3,
             align: 'center',
             valign: 'middle',
             border: {
@@ -45,12 +69,13 @@ export class GameUserInterface extends UserInterfaceBase {
             },
             style: {
                 border: {
-                    fg: '#fff'
+                    fg: '#fff',
+                    bg: '#000'
                 },
                 bg: '#000'
             }
         });
-        this.setPromptContents();
+        this.promptBox.hide();
 
         this.gameoverBox = blessed.box({
             parent: this.screen,
@@ -76,12 +101,13 @@ export class GameUserInterface extends UserInterfaceBase {
     }
 
     public setPromptContents(contents: string[] = []) {
-        if (contents.length) {
-            contents.push('--------------------');
+        if (!contents.length) {
+            this.promptBox.hide();
+            return;
         }
-        contents = [...contents, 'Ctrl: `↑ ↓ ← →`', 'Exit: `ctrl + c`'];
         this.promptBox.setContent(contents.join('\n'));
         this.promptBox.height = contents.length + 2;
+        this.promptBox.show();
     }
 
     public setRects(points: IPoint[]) {

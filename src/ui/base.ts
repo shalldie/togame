@@ -33,7 +33,13 @@ export class UserInterfaceBase extends EventEmitter implements ISetable, IDispos
             left: 'center',
             width: width * config.WIDTH_SCALE,
             height: height,
-            tags: true
+            tags: true,
+            border: {
+                type: 'bg'
+            },
+            style: {
+                bg: '#000'
+            }
         });
     }
 
