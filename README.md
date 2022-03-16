@@ -26,7 +26,7 @@ Select the game with arrow keys. 用方向键选择游戏。
 ### Tetris - 俄罗斯方块
 
 <p align="center">
-    <img width="600" src="https://user-images.githubusercontent.com/9987486/158326135-40402735-08b4-49ff-a7ba-0e5a2449feb8.png" alt="snake">
+    <img width="600" src="https://user-images.githubusercontent.com/9987486/158592783-0b20da03-39b7-4830-a669-170355f93f2b.png" alt="tetris">
 </p>
 
 ## Install && Play

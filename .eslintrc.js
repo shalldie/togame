@@ -12,6 +12,7 @@ module.exports = {
     plugins: ['@typescript-eslint'],
     extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'prettier'],
     rules: {
+        'no-case-declarations': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off',
         '@typescript-eslint/ban-types': 'off',
         '@typescript-eslint/no-explicit-any': 'off'
