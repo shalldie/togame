@@ -193,6 +193,14 @@ export class Tetris implements IGame {
         }
     }
 
+    private validate() {
+        const ok = this.blockMap.every(col => !col[0]);
+        if (!ok) {
+            this.ui.showGameOver();
+            this.stop();
+        }
+    }
+
     private step() {
         // 新 shape
         if (!this.canMove({ x: 0, y: 1 })) {
@@ -204,6 +212,9 @@ export class Tetris implements IGame {
 
         // 向下
         this.moveShape(EDirection.DOWN);
+
+        // validate
+        this.validate();
 
         this.draw();
     }
