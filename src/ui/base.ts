@@ -2,6 +2,15 @@ import blessed, { Widgets } from 'blessed';
 import EventEmitter from 'events';
 import { config } from '../config';
 
+/**
+ * 基础画布结构
+ *
+ * @export
+ * @class UserInterfaceBase
+ * @extends {EventEmitter}
+ * @implements {ISetable}
+ * @implements {IDisposable}
+ */
 export class UserInterfaceBase extends EventEmitter implements ISetable, IDisposable {
     public screen: Widgets.Screen = blessed.screen({
         smartCSR: true,
@@ -11,6 +20,13 @@ export class UserInterfaceBase extends EventEmitter implements ISetable, IDispos
 
     public layout!: Widgets.BoxElement;
 
+    /**
+     * 初始化
+     *
+     * @param {number} width
+     * @param {number} height
+     * @memberof UserInterfaceBase
+     */
     public setup(width: number, height: number) {
         this.initEvents();
         this.initLayouts(width, height);
@@ -43,10 +59,20 @@ export class UserInterfaceBase extends EventEmitter implements ISetable, IDispos
         });
     }
 
+    /**
+     * 重绘
+     *
+     * @memberof UserInterfaceBase
+     */
     public draw() {
         this.screen.render();
     }
 
+    /**
+     * 释放资源
+     *
+     * @memberof UserInterfaceBase
+     */
     dispose(): void {
         this.screen.destroy();
     }

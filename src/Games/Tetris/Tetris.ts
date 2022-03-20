@@ -1,17 +1,24 @@
 import { IGame } from '..';
-import { EDirection } from '../../common/EDirection';
-import { IPoint } from '../../shape';
-import { GameUserInterface } from '../../ui';
+import { EDirection } from '../../common';
+import { IPoint } from '../../common';
+import { GameUI } from '../../ui';
 import { TetrisBlock } from './Block';
 import { TetrisShape } from './Shape';
 
-const WIDTH = 12;
-const HEIGHT = 20;
-const INTERVAL = 800;
+const WIDTH = 12; // 画布宽
+const HEIGHT = 20; // 画布高
+const INTERVAL = 800; // interval
 
+/**
+ * 俄罗斯方块
+ *
+ * @export
+ * @class Tetris
+ * @implements {IGame}
+ */
 export class Tetris implements IGame {
     private score = 0;
-    private ui = new GameUserInterface();
+    private ui = new GameUI();
     private timer: any;
 
     /** 当前静止的方块 */

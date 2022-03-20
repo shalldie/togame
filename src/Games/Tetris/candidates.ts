@@ -1,3 +1,6 @@
+/**
+ * 所有的形状
+ */
 export const SHAPE_STRUCTS = [
     [
         //所有方块类型
@@ -38,4 +41,7 @@ export const SHAPE_STRUCTS = [
     ]
 ];
 
+/**
+ * 所有的颜色
+ */
 export const COLOR_LIST = ['#2ad', '#009900', '#f00', '#9900FF'];

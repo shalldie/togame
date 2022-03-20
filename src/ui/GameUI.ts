@@ -1,9 +1,9 @@
 import blessed, { Widgets } from 'blessed';
 import { config } from '../config';
-import { IPoint } from '../shape/IPoint';
+import { IPoint } from '../common/IPoint';
 import { UserInterfaceBase } from './base';
 
-export class GameUserInterface extends UserInterfaceBase {
+export class GameUI extends UserInterfaceBase {
     public playground!: Widgets.BoxElement;
 
     public tipBox!: Widgets.BoxElement;

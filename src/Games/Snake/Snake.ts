@@ -1,14 +1,21 @@
 import { IGame } from '..';
-import { EDirection } from '../../common/EDirection';
-import { IPoint } from '../../shape';
-import { GameUserInterface } from '../../ui';
+import { EDirection } from '../../common';
+import { IPoint } from '../../common';
+import { GameUI } from '../../ui';
 
-const WIDTH = 18;
-const HEIGHT = 18;
-const INTERVAL = 200;
+const WIDTH = 18; // 画布宽
+const HEIGHT = 18; // 画布高
+const INTERVAL = 200; // interval
 
+/**
+ * 贪吃蛇
+ *
+ * @export
+ * @class Snake
+ * @implements {IGame}
+ */
 export class Snake implements IGame {
-    private ui = new GameUserInterface();
+    private ui = new GameUI();
     private timer: any;
 
     /** 当前食物 🍜 */

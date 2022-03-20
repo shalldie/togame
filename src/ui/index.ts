@@ -1,2 +1,4 @@
 export * from './base';
-export * from './GameUserInterface';
+export * from './GameUI';
+export * from './ScaleUI';
+export * from './GameListUI';

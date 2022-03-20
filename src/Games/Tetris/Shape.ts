@@ -1,6 +1,13 @@
 import { TetrisBlock } from './Block';
-import { COLOR_LIST, SHAPE_STRUCTS } from './structs';
+import { COLOR_LIST, SHAPE_STRUCTS } from './candidates';
 
+/**
+ * 图形 - 俄罗斯方块
+ *
+ * @export
+ * @class TetrisShape
+ * @extends {TetrisBlock}
+ */
 export class TetrisShape extends TetrisBlock {
     public blocks: TetrisBlock[] = [];
 
@@ -9,6 +16,14 @@ export class TetrisShape extends TetrisBlock {
         Object.assign(this, options);
     }
 
+    /**
+     * 生成一个新实例
+     *
+     * @static
+     * @param {Partial<TetrisShape>} [options={}]
+     * @return {*}
+     * @memberof TetrisShape
+     */
     public static newShape(options: Partial<TetrisShape> = {}) {
         // 随机个颜色
         let len = COLOR_LIST.length;
@@ -45,6 +60,12 @@ export class TetrisShape extends TetrisBlock {
         return shape;
     }
 
+    /**
+     * 旋转
+     *
+     * @return {*}
+     * @memberof TetrisShape
+     */
     public rotate() {
         const rx0 = 1.5;
         const ry0 = 1.5;

@@ -1,10 +1,8 @@
 #!/usr/bin/env node
 
-import { IGame } from './Games';
-import { Snake } from './Games/Snake';
-import { Tetris } from './Games/Tetris';
-import { ListUserInterface } from './ui/ListUserInterface';
-import { ScaleUserInterface } from './ui/ScaleUserInterface';
+import { Snake, Tetris } from './Games';
+import { GameListUI } from './ui/GameListUI';
+import { ScaleUI } from './ui';
 
 async function main() {
     // 清屏
@@ -12,10 +10,10 @@ async function main() {
     process.stdout.write('\x1b[0f');
 
     // 调整 config
-    await new ScaleUserInterface().setup();
+    await new ScaleUI().setup();
 
     // 选择游戏
-    const opt = await new ListUserInterface().choseOptions([
+    const opt = await new GameListUI().choseOptions([
         {
             label: '1. Game - Snake',
             value: Snake
@@ -26,7 +24,7 @@ async function main() {
         }
     ]);
 
-    const Game = opt.value as new () => IGame;
+    const Game = opt.value;
 
     if (Game) {
         new Game().setup();

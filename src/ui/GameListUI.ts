@@ -1,20 +1,25 @@
 import blessed, { Widgets } from 'blessed';
-import { EDirection } from '../common/EDirection';
+import { EDirection } from '../common';
 import { config } from '../config';
+import { IGame } from '../Games';
 import { UserInterfaceBase } from './base';
 
 export interface IOption {
     label: string;
-    value: any;
+    value: new () => IGame;
 }
+
+const TITLE_HEIGHT = 3;
 
 const OPTION_WIDTH = 12;
 const OPTION_HEIGHT = 3;
 
-export class ListUserInterface extends UserInterfaceBase {
+export class GameListUI extends UserInterfaceBase {
     private options: IOption[] = [];
 
     private focusIndex = 0;
+
+    private titleBox!: Widgets.BoxElement;
 
     private arrow!: Widgets.BoxElement;
 
@@ -23,9 +28,10 @@ export class ListUserInterface extends UserInterfaceBase {
     public choseOptions(options: IOption[]): Promise<IOption> {
         this.options = options;
 
-        super.setup(OPTION_WIDTH * 2, OPTION_HEIGHT * (options.length + 3));
+        super.setup(OPTION_WIDTH * 2, OPTION_HEIGHT * (options.length + 2) + TITLE_HEIGHT);
         this.layout.border.type = 'line';
         this.layout.style.border.bg = '#000';
+        this.createTitleBox();
         this.createArrow();
         this.createOptionBoxes();
         this.bindFocus();
@@ -39,12 +45,29 @@ export class ListUserInterface extends UserInterfaceBase {
         });
     }
 
+    private createTitleBox() {
+        this.titleBox = blessed.box({
+            parent: this.layout,
+            top: 1,
+            left: 'center',
+            width: '90%',
+            height: TITLE_HEIGHT,
+            align: 'center',
+            valign: 'middle',
+            content: `========== It's time to game! ==========`,
+            tags: true,
+            style: {
+                fg: '#000',
+                bg: '#fff'
+            }
+        });
+    }
+
     private createArrow() {
         if (!this.arrow) {
             this.arrow = blessed.box({
                 parent: this.layout,
-                top: OPTION_HEIGHT * this.focusIndex + OPTION_HEIGHT,
-                right: (OPTION_WIDTH * config.WIDTH_SCALE * 3) / 4,
+                top: OPTION_HEIGHT * this.focusIndex + OPTION_HEIGHT + TITLE_HEIGHT,
                 left: 0,
                 width: (OPTION_WIDTH * config.WIDTH_SCALE) / 2,
                 height: OPTION_HEIGHT,
@@ -58,17 +81,15 @@ export class ListUserInterface extends UserInterfaceBase {
             });
             return;
         }
-        this.arrow.top = OPTION_HEIGHT * this.focusIndex + OPTION_HEIGHT;
+        this.arrow.top = OPTION_HEIGHT * this.focusIndex + OPTION_HEIGHT + TITLE_HEIGHT;
     }
 
     private createOptionBoxes() {
         for (let i = 0; i < this.options.length; i++) {
             const box = blessed.box({
                 parent: this.layout,
-                top: OPTION_HEIGHT * i + OPTION_HEIGHT,
+                top: OPTION_HEIGHT * i + OPTION_HEIGHT + TITLE_HEIGHT,
                 left: (OPTION_WIDTH * config.WIDTH_SCALE) / 2 + 3,
-                // left: 'center',
-                // right: (OPTION_WIDTH * config.WIDTH_SCALE * 2) / 4,
                 width: OPTION_WIDTH * config.WIDTH_SCALE,
                 height: OPTION_HEIGHT,
                 align: 'center',

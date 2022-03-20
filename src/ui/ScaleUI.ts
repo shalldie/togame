@@ -1,9 +1,9 @@
 import blessed, { Widgets } from 'blessed';
-import { EDirection } from '../common/EDirection';
+import { EDirection } from '../common';
 import { config } from '../config';
 import { UserInterfaceBase } from './base';
 
-export class ScaleUserInterface extends UserInterfaceBase {
+export class ScaleUI extends UserInterfaceBase {
     public playground!: Widgets.BoxElement;
 
     public setup(): Promise<void> {
