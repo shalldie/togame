@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { Snake, Tetris } from './Games';
+import { Snake, Tetris } from './games';
 import { GameListUI } from './ui/GameListUI';
 import { ScaleUI } from './ui';
 

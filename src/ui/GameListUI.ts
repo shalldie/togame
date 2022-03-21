@@ -1,7 +1,7 @@
 import blessed, { Widgets } from 'blessed';
 import { EDirection } from '../common';
 import { config } from '../config';
-import { IGame } from '../Games';
+import { IGame } from '../games';
 import { UserInterfaceBase } from './base';
 
 export interface IOption {
