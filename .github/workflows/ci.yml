@@ -30,6 +30,7 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm run build
+      - run: rm .npmrc
 
       # publish to npm
       - id: publish
